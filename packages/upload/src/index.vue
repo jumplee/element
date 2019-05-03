@@ -184,18 +184,22 @@ export default {
       if (file) {
         file.status = 'success';
         file.response = res;
+        if (res.success === true) {
+          this.onSuccess(res, file, this.uploadFiles);
+          this.onChange(file, this.uploadFiles);
+        } else {
+          file.status = 'fail';
+          file.errMsg = res.errMsg;
+          this.onError(res, file, this.uploadFiles);
+          this.onChange(file, this.uploadFiles);
+        }
 
-        this.onSuccess(res, file, this.uploadFiles);
-        this.onChange(file, this.uploadFiles);
       }
     },
     handleError(err, rawFile) {
       const file = this.getFile(rawFile);
-      const fileList = this.uploadFiles;
 
       file.status = 'fail';
-
-      fileList.splice(fileList.indexOf(file), 1);
 
       this.onError(err, file, this.uploadFiles);
       this.onChange(file, this.uploadFiles);

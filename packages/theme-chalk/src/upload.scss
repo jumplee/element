@@ -216,6 +216,28 @@
         }
       }
     }
+
+    @include when(fail){
+      .el-upload-list__item-status-label {
+        display: block;
+      }
+      .el-icon-upload-fail{
+        color:#F56C6C;
+      }
+      .el-upload-list__item-error-msg{
+        // position: absolute;
+        // right: 29px;
+        // top: 0px;
+        color:#F56C6C;
+      }
+      
+      &:hover, &:focus {
+        .el-upload-list__item-status-label {
+          display: none;
+        }
+      }
+    }
+
   }
 
   @include when(disabled) {
